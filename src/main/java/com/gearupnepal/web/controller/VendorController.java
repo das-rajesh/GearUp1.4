@@ -7,9 +7,15 @@ package com.gearupnepal.web.controller;
 
 import com.gearupnepal.web.entity.Vendor;
 import com.gearupnepal.web.entity.Login;
+import com.gearupnepal.web.entity.Purchase;
 import com.gearupnepal.web.entity.Role;
+import com.gearupnepal.web.entity.SubCategory;
 import com.gearupnepal.web.entity.repository.VendorRepository;
 import com.gearupnepal.web.entity.repository.LoginRepository;
+import com.gearupnepal.web.service.CategoryService;
+import com.gearupnepal.web.service.ChildSubcategoryService;
+import com.gearupnepal.web.service.PurchaseService;
+import com.gearupnepal.web.service.SubCategoryService;
 import com.gearupnepal.web.service.VendorService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +42,18 @@ public class VendorController {
     VendorService vendorService;
     @Autowired
     LoginRepository loginRepository;
+    
+    @Autowired
+    PurchaseService purchaseService;
+    
+    @Autowired 
+    CategoryService categoryService;
+    
+    @Autowired
+    SubCategoryService subCategoryService;
+    
+    @Autowired
+    ChildSubcategoryService childSubcategoryService;
 
     @GetMapping
     public String index(Model model) {
@@ -56,6 +74,8 @@ public class VendorController {
         vendor.setCreatedBy(logins.get(logins.size() - 1).getUserName());
         System.out.println("saving");
         vendorRepository.save(vendor);
+          
+       // purchaseService.save(new Purchase(vendor.getName(),category, subcategory, childSubCategory, vendor.g, Integer.SIZE, Integer.SIZE, Integer.SIZE, base64Image, createdBy, purchasedDate, modifiedDate));
         return "redirect:/vendor";
     }
 

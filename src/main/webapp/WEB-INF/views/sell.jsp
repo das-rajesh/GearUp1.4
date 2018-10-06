@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Purchase </title>
+        <title>Sale Report </title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -17,7 +17,7 @@
         <link rel="stylesheet" type="text/css" href="css/catrep.css">
         <div class="container">
             <div class="row">
-                <h1>Purchase Report</h1> 
+                <h1>Sale  Report</h1> 
                 <c:set var="evenCount" value="${0}" />
 
                 <table class="table">
@@ -25,7 +25,6 @@
                         <tr>
                             <th>S.No</th>
                             <th>Purchase Date</th>
-                            <th>vendor</th>
                             <th>Category</th>
                             <th>Sub-Category</th>
                             <th>Child Sub-Category</th>
@@ -37,21 +36,20 @@
                     </thead><tr>
                         <td>${category.id}</td>
                     </tr>
-                    <c:forEach var="purchase" items="${purchases}">
+                    <c:forEach var="sale" items="${sales}">
                         <c:set var="evenCount" value="${evenCount+1}" />
                         <tr>
                             <td>${evenCount}</td>
-                            <td>${purchase.purchasedDate}</td>
-                            <td>${purchase.vendor}</td>
-                            <td>${purchase.category}</td>
-                            <td>${purchase.subcategory}</td>
-                            <td>${purchase.childsubcategory}</td>
+                            <td>${sale.purchasedDate}</td>
+                            <td>${sale.category}</td>
+                            <td>${sale.subcategory}</td>
+                            <td>${sale.childsubcategory}</td>
                             <td> 
-                                    <img src="data:image/jpg;base64,${purchase.base64Image}" width="100" height="100"/>
+                                    <img src="data:image/jpg;base64,${sale.base64Image}" width="100" height="100"/>
                             </td>
-                            <td id="price" >${purchase.unitprice}</td>
-                            <td id="quantity">${purchase.quantity}</td>
-                            <td id="total">${purchase.totalprice}</td>
+                            <td id="price" >${sale.unitprice}</d>
+                            <td id="quantity">${sale.quantity}</td>
+                            <td id="total">${sale.totalprice}</td>
 
                         </tr>
                     </c:forEach>

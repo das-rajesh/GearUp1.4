@@ -7,13 +7,10 @@ package com.gearupnepal.web.controller;
 
 import com.gearupnepal.web.entity.Category;
 import com.gearupnepal.web.entity.Login;
-import com.gearupnepal.web.entity.Role;
 import com.gearupnepal.web.entity.TempChild;
-import com.gearupnepal.web.entity.repository.CategoryRepository;
 import com.gearupnepal.web.entity.repository.LoginRepository;
 import com.gearupnepal.web.service.CategoryService;
 import com.gearupnepal.web.service.ChildSubcategoryService;
-import com.gearupnepal.web.service.PurchaseService;
 import com.gearupnepal.web.service.SubCategoryService;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,16 +23,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
  * @author Dell
  */
 @Controller
-@RequestMapping(value = "/purchase")
+@RequestMapping(value = "/stock")
 @MultipartConfig(maxFileSize = 16177215)    // upload file's size up to 16MB
-public class PurchaseController {
+public class StockSummaryController {
 
     @Autowired
     CategoryService categoryService;
@@ -50,9 +46,6 @@ public class PurchaseController {
     ChildSubcategoryService childSubcategoryService;
 
     List<TempChild> tempChilds = new ArrayList<>();
-    
-    @Autowired
-    PurchaseService purchaseService;
 
     @GetMapping
     public String index(Model model) {
@@ -61,10 +54,9 @@ public class PurchaseController {
         model.addAttribute("subCategories", subCategoryService.getAll());
         model.addAttribute("childSubCategories", childSubcategoryService.getAll());
         List<Category> categories = categoryService.getAll();
-        model.addAttribute("purchases",purchaseService.getAll());
         System.out.println(categories.get(0).getName());
 
-        return "purchase";
+        return "stock";
     }
 
     @GetMapping(value = "/add")

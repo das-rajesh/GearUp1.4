@@ -7,9 +7,11 @@ package com.gearupnepal.web.controller;
 
 import com.gearupnepal.web.entity.ChildSubcategory;
 import com.gearupnepal.web.entity.Login;
+import com.gearupnepal.web.entity.Purchase;
 import com.gearupnepal.web.entity.repository.LoginRepository;
 import com.gearupnepal.web.service.CategoryService;
 import com.gearupnepal.web.service.ChildSubcategoryService;
+import com.gearupnepal.web.service.PurchaseService;
 import com.gearupnepal.web.service.SubCategoryService;
 import com.gearupnepal.web.service.VendorService;
 import java.io.IOException;
@@ -52,6 +54,9 @@ public class UpdateInventoryController {
     @Autowired
     VendorService vendorService;
 
+    @Autowired
+    PurchaseService purchaseService;
+
     @RequestMapping(method = RequestMethod.GET)
     public String index(Model model) {
 
@@ -76,19 +81,37 @@ public class UpdateInventoryController {
         model.addAttribute("subCategories", subCategoryService.getSubCategoryListByCategoryId(subCategoryService.findById(subcategoryid).getId()));
         model.addAttribute("childSubCategories", childSubcategoryService.findChildSubCategoriesListById(subcategoryid));
         System.out.println(childSubcategoryService.findChildSubCategoriesListById(subcategoryid).size() + "asddddddddddddddddddddd");
-        model.addAttribute("category", subCategoryService.findById(subcategoryid).getCategoriesId());
+        model.addAttribute("category", subCategoryService.findById(subcategoryid).getCategoriesId().getName());
         model.addAttribute("subcategory", subCategoryService.findById(subcategoryid).getName());
         model.addAttribute("subcategoryId", subcategoryid);
         model.addAttribute("vendors", vendorService.getAll());
+        model.addAttribute("childSubCategoryname", childSubcategory.getName());
         childSubcategory.setPhoto(photo.getBytes());
         childSubcategory.setSubCategoriesId(subCategoryService.findById(subcategoryid));
+        
+                childSubcategory.setId(childsubcategoryidcategoryId);
+
         childSubcategoryService.save(childSubcategory);
         //Files.write(Paths.get("image.jpg"), photo.getBytes());
+
+        String category = childSubcategory.getSubCategoriesId().getCategoriesId().getName();
+        String subcategory = childSubcategory.getSubCategoriesId().getName();
+        String childsubcategory = childSubcategory.getName();
+
+        purchaseService.save(new Purchase(
+                childSubcategory.getVendorId().getName(),
+                childSubcategory.getSubCategoriesId().getName(),
+                subcategory, childsubcategory,
+                childSubcategory.getPhoto(),
+                childSubcategory.getPrice(),
+                childSubcategory.getQuantity(),
+                childSubcategory.getPrice() * childSubcategory.getQuantity(),
+                childSubcategory.getBase64Image(),
+                childSubcategory.getCreatedBy()));
 
         return "updateinventory";
     }
 
-  
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable("id") long id, Model model) {
         model.addAttribute("vendors", vendorService.getAll());

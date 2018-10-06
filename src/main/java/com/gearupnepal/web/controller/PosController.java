@@ -6,13 +6,13 @@
 package com.gearupnepal.web.controller;
 
 import com.gearupnepal.web.entity.ChildSubcategory;
-import com.gearupnepal.web.entity.Login;
-import com.gearupnepal.web.entity.SubCategory;
+import com.gearupnepal.web.entity.Sale;
 import com.gearupnepal.web.entity.TempChild;
 import com.gearupnepal.web.entity.TempChildWrapper;
 import com.gearupnepal.web.entity.repository.LoginRepository;
 import com.gearupnepal.web.service.CategoryService;
 import com.gearupnepal.web.service.ChildSubcategoryService;
+import com.gearupnepal.web.service.SaleService;
 import com.gearupnepal.web.service.SubCategoryService;
 import com.gearupnepal.web.service.VendorService;
 import java.util.ArrayList;
@@ -51,6 +51,9 @@ public class PosController {
     ChildSubcategoryService childSubcategoryService;
 
     List<TempChild> tempChilds = new ArrayList<>();
+
+    @Autowired
+    SaleService saleService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(Model model) {
@@ -102,7 +105,8 @@ public class PosController {
 //        model.addAttribute("subCategories", subCategoryService.getSubCategoryListByCategoryId(id));
 //        model.addAttribute("category", categoryService.findById(id).getName());
 //        model.addAttribute("categoryId", id);
-        tempChilds.add(new TempChild(id, childSubcategoryService.findById(id).getName(), childSubcategoryService.findById(id).getQuantity(), childSubcategoryService.findById(id).getPrice()));
+        tempChilds.add(new TempChild(id, childSubcategoryService.findById(id).getName(),
+                childSubcategoryService.findById(id).getQuantity(), childSubcategoryService.findById(id).getPrice()));
         model.addAttribute("tempChilds", tempChilds);
         model.addAttribute("totals", total());
         model.addAttribute("id", id);
@@ -155,9 +159,11 @@ public class PosController {
         model.addAttribute("one", 1);
         model.addAttribute("id", id);
 
-        tempChilds.add(new TempChild(id, childSubcategoryService.findById(id).getName(), childSubcategoryService.findById(id).getQuantity(), childSubcategoryService.findById(id).getPrice()));
+        tempChilds.add(new TempChild(id, childSubcategoryService.findById(id).getName(),
+                childSubcategoryService.findById(id).getQuantity(), childSubcategoryService.findById(id).getPrice()));
         model.addAttribute("tempChilds", tempChilds);
         model.addAttribute("totals", total());
+
         return "pointofsale_2_3";
 
     }
@@ -194,7 +200,7 @@ public class PosController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateQuantity(@ModelAttribute(value = "tempChildListWrapper") TempChildWrapper tempChildWrapper,
             Model model) {
-
+        long id = 0;
         //      childSubcategoryService.findById(0).setQuantity(20);
         //   childSubcategoryService.save(childSubcategoryService.findById(3));
         System.out.println(tempChildWrapper.getUsers().get(0).getId());
@@ -207,8 +213,29 @@ public class PosController {
                     System.out.println(ch.getName());
                     System.out.println(ch.getQuantity() + "sdasdasdasdasd");
                     ch.setId(ch.getId());
+
                     childSubcategoryService.save(ch);
                     System.out.println(ch.getQuantity() + "quantity ");
+
+                    String category = ch.getSubCategoriesId().getCategoriesId().getName();
+                    String subcategory = ch.getSubCategoriesId().getName();
+                    String childsubcategory = ch.getName();
+                    System.out.println((int) tempChildWrapper.getUsers().get(i).getQuantity() + "quantity uiiuyoiuyiuyiu");
+                   Sale sale=new Sale(
+                            category,
+                            subcategory,
+                            childsubcategory,
+                            ch.getPhoto(),
+                             tempChildWrapper.getUsers().get(i).getPrice(),
+                            (int) tempChildWrapper.getUsers().get(i).getQuantity(),
+                            tempChildWrapper.getUsers().get(i).getPrice()
+                            *  tempChildWrapper.getUsers().get(i).getQuantity(),
+                            ch.getBase64Image(),
+                            ch.getCreatedBy());
+                    sale.setUnitprice(tempChildWrapper.getUsers().get(i).getPrice()+0.0);
+                    sale.setTotalprice((tempChildWrapper.getUsers().get(i).getPrice())*
+                            ((tempChildWrapper.getUsers().get(i).getQuantity())));
+                    saleService.save(sale);
 
                 }
             }
@@ -217,6 +244,7 @@ public class PosController {
         model.addAttribute("subCategories", subCategoryService.getAll());
         model.addAttribute("vendors", vendorService.getAll());
         model.addAttribute("one", 1);
+
         tempChilds.clear();
 
         return "pointofsale_2_3";

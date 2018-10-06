@@ -17,7 +17,7 @@
         <link rel="stylesheet" type="text/css" href="css/catrep.css">
         <div class="container">
             <div class="row">
-                <h1>Purchase Report</h1> 
+                <h1>Stock Report</h1> 
                 <c:set var="evenCount" value="${0}" />
 
                 <table class="table">
@@ -37,21 +37,21 @@
                     </thead><tr>
                         <td>${category.id}</td>
                     </tr>
-                    <c:forEach var="purchase" items="${purchases}">
+                    <c:forEach var="childsubcategory" items="${childSubCategories}">
                         <c:set var="evenCount" value="${evenCount+1}" />
                         <tr>
                             <td>${evenCount}</td>
-                            <td>${purchase.purchasedDate}</td>
-                            <td>${purchase.vendor}</td>
-                            <td>${purchase.category}</td>
-                            <td>${purchase.subcategory}</td>
-                            <td>${purchase.childsubcategory}</td>
+                            <td>${childsubcategory.createdDate}</td>
+                            <td>${childsubcategory.vendorId.name}</td>
+                            <td>${childsubcategory.subCategoriesId.categoriesId.name}</td>
+                            <td>${childsubcategory.subCategoriesId.name}</td>
+                            <td>${childsubcategory.name}</td>
                             <td> 
-                                    <img src="data:image/jpg;base64,${purchase.base64Image}" width="100" height="100"/>
+                                    <img src="data:image/jpg;base64,${childsubcategory.base64Image}" width="100" height="100"/>
                             </td>
-                            <td id="price" >${purchase.unitprice}</td>
-                            <td id="quantity">${purchase.quantity}</td>
-                            <td id="total">${purchase.totalprice}</td>
+                            <td id="price" >${childsubcategory.price}</td>
+                            <td id="quantity">${childsubcategory.quantity}</td>
+                            <td id="total"></td>
 
                         </tr>
                     </c:forEach>

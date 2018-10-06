@@ -85,6 +85,19 @@ public class Vendor implements Serializable {
         this.modifiedDate = modifiedDate;
         this.childCategoryModelNameList = childCategoryModelNameList;
     }
+ public Vendor(String name, String email, String contactNo, String website, String type, String country, Long subCategoryModelNameId, String createdBy, Date createdDate, Date modifiedDate, List<ChildSubcategory> childCategoryModelNameList) {
+        this.name = name;
+        this.email = email;
+        this.contactNo = contactNo;
+        this.website = website;
+        this.type = type;
+        this.country = country;
+        this.subCategoryModelNameId = subCategoryModelNameId;
+        this.createdBy = createdBy;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
+        this.childCategoryModelNameList = childCategoryModelNameList;
+    }
 
     public long getId() {
         return id;
