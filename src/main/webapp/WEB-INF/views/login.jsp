@@ -17,7 +17,7 @@
                         <h2>Gearup Nepal</h2>
                         <p>Please enter your email and password</p>
                     </div>
-                    <form method="post" >
+                    <form method="post" action="/login">
 
                         <div class="form-group">
 
@@ -32,12 +32,11 @@
 
                         </div>
                         <div class="forgot">
-                            <a href="reset.html">Forgot password?</a>
+                            <a href="reset">Forgot password?</a>
                         </div>
-                        <div class="signup">
-                            <a href="signup">Sign Up</a>
-                        </div>
+                        
                         <button type="submit" class="btn btn-primary">Login</button>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
                     </form>
                 </div>

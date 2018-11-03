@@ -41,9 +41,9 @@
                 </form>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/category">inventory</a></li>
+                        <!--<li><a href="/category">${inventory}</a></li>-->
 
-                        <li><a href="#">Sign in as admin</a></li>
+                        <li><a href="#">Sign in as user</a></li>
                         <li><a href="/logout" class="glyphicon glyphicon-off"></a></li>
 
                     </ul>
@@ -76,7 +76,7 @@
                         <c:forEach var="tempChild" items="${tempChilds}">
                             <c:set var="evenCount" value="${evenCount+1}" />
                             <tr>
-                        <form method="post" action="/POS/change/${evenCount}">
+                        <form method="post" action="/${authority}/pos/change/${evenCount}">
 
                             <th scope="row">${evenCount}</th>
                             <td>${tempChild.name}</td>  
@@ -96,7 +96,7 @@
 
 
                     <tr>
-                        <td><form method="post" action="/POS/child/${id}">
+                        <td><form method="post" action="/${authority}/pos/child/${id}">
                                 <button type="button" id="${id}" onclick="javascript:buttonClick(this)"   class="btn btn-primary">All Total
                             </form></td>
                         <td></td>
@@ -110,7 +110,7 @@
                     </tr>
 <!--                    <tr>
 
-                        <td><form method="post" action="/POS/child/${id}">
+                        <td><form method="post" action="/${authority}/pos/child/${id}">
                                 <button type="button" id="${id}" onclick="javascript:purchase(this)"   class="btn btn-primary">Purchase
                             </form></td>
                     </tr>-->
@@ -118,7 +118,7 @@
                 </table>
 
                     <!--<button type="submit" id="${id}" class="btn btn-primary">Purchase</button>-->
-                <form:form method="post" action="/POS/update" modelAttribute="tempChildListWrapper">
+                <form:form method="post" action="/${authority}/pos/update" modelAttribute="tempChildListWrapper">
                     <c:forEach varStatus="us" var="user" items="${tempChildListWrapper.users}" >
                         <tr>
                             <td><form:input  type="hidden" path="users[${us.index}].name"/>${user.name}</td>
@@ -148,7 +148,7 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <c:forEach var="subcategory" items="${category.subCategoryList}">
-                                    <li value="${subcategory.id}"><a href="/POS/${subcategory.id}">${subcategory.name}</a></li>
+                                    <li value="${subcategory.id}"><a href="/${authority}/pos/${subcategory.id}">${subcategory.name}</a></li>
                                     </c:forEach>
                             </ul>
                         </div>
@@ -157,7 +157,7 @@
                     </c:forEach>
                     <div class="btn1" id="main">
                         <c:forEach var="childSubCategory" items="${childSubCategoriesbyId}">
-                            <form method="get" action="/POS/child/${childSubCategory.id}">
+                            <form method="get" action="/${authority}/pos/child/${childSubCategory.id}">
                                 <button  type="submit"  class="btn btn-danger"> ${childSubCategory.name}</button>
 
                             </form>
@@ -176,7 +176,7 @@
         {
             // alert('s');
             link1 = elm.value;
-            window.location = "/updateinventory/subcategoryofcategory/" + elm.value;
+            window.location = "/${authority}/updateinventory/subcategoryofcategory/" + elm.value;
         }</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->

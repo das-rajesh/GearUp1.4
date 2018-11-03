@@ -17,7 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @EnableAutoConfiguration
 @SpringBootApplication
-@ComponentScan
+@ComponentScan(basePackages = "com.gearupnepal")
 //@EnableCaching
 public class AppStarter {
     

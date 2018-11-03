@@ -53,6 +53,12 @@
 
                         </div>
 
+                        <div class="form-group">
+
+
+                            <input type="text" class="form-control" id="inputFav"  name="favGame" placeholder="Favourite  Game ">
+
+                        </div>
                         <button type="submit" class="btn btn-primary">SignUp</button>
 
                     </form>

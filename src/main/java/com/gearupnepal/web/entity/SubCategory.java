@@ -5,12 +5,14 @@
  */
 package com.gearupnepal.web.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,6 +35,9 @@ import javax.validation.constraints.Size;
 @Table(name = "sub_categories")
 public class SubCategory implements Serializable {
 
+    @Column(name = "quantity")
+    private Integer quantity;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -41,8 +46,6 @@ public class SubCategory implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "quantity")
-    private Long quantity;
 
     @Column(name = "created_by")
     private String createdBy;
@@ -56,19 +59,21 @@ public class SubCategory implements Serializable {
     private Date modifiedDate;
 
     @JoinColumn(name = "categories_id", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("subCategoryList")
     private Category categoriesId;
 
-    @OneToMany(mappedBy = "subCategoriesId")
+    @OneToMany(mappedBy = "subCategoriesId",fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("subCategoriesId")
     private List<ChildSubcategory> childCategoryModelNameList;
 
     public SubCategory() {
     }
 
-    public SubCategory(long id, String name, Long quantity, String createdBy, Date createdDate, Date modifiedDate, Category categoriesId, List<ChildSubcategory> childCategoryModelNameList) {
+    public SubCategory(Integer quantity, long id, String name, String createdBy, Date createdDate, Date modifiedDate, Category categoriesId, List<ChildSubcategory> childCategoryModelNameList) {
+        this.quantity = quantity;
         this.id = id;
         this.name = name;
-        this.quantity = quantity;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
@@ -76,14 +81,12 @@ public class SubCategory implements Serializable {
         this.childCategoryModelNameList = childCategoryModelNameList;
     }
 
-    public SubCategory(long id) {
-        this.id = id;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public SubCategory(long id, Date createdDate, Date modifiedDate) {
-        this.id = id;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public long getId() {
@@ -100,14 +103,6 @@ public class SubCategory implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
     }
 
     public String getCreatedBy() {
@@ -150,4 +145,5 @@ public class SubCategory implements Serializable {
         this.childCategoryModelNameList = childCategoryModelNameList;
     }
 
+    
 }

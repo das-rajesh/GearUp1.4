@@ -36,18 +36,12 @@ public class Purchase implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
     @Column(name = "vendor")
     private String vendor;
-    @Size(max = 100)
     @Column(name = "category")
     private String category;
-    @Size(max = 100)
     @Column(name = "subcategory")
     private String subcategory;
-    @Size(max = 100)
     @Column(name = "childsubcategory")
     private String childsubcategory;
     @Lob
@@ -59,10 +53,8 @@ public class Purchase implements Serializable {
     private Integer quantity;
     @Column(name = "totalprice")
     private Float totalprice;
-    @Size(max = 1000)
     @Column(name = "base64Image")
     private String base64Image;
-    @Size(max = 200)
     @Column(name = "created_by")
     private String createdBy;
    

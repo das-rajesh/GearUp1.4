@@ -26,13 +26,13 @@ public class UserServiceImpl implements UserService {
 
    
 
-    @Cacheable(value = "users")
+  //  @Cacheable(value = "users")
     @Override
     public List<User> getAll() {
         return userRepository.findAll();
     }
 
-    @CacheEvict(allEntries = true, value = "users")
+   // @CacheEvict(allEntries = true, value = "users")
     @Override
     public void save(User user) {
         userRepository.save(user);

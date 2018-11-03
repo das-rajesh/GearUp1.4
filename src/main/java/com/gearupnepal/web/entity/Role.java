@@ -26,8 +26,6 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "roles")
-@NamedQueries({
-    @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")})
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,9 +36,9 @@ public class Role implements Serializable {
     private long id;
    
     
-    @Size(min = 1, max = 100)
     @Column(name = "name")
     private String name;
+    
     @OneToMany(mappedBy = "roleId")
     private List<UserRole> userRoleList;
 

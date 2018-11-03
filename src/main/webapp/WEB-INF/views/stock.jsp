@@ -17,6 +17,27 @@
         <link rel="stylesheet" type="text/css" href="css/catrep.css">
         <div class="container">
             <div class="row">
+                <nav class="navbar navbar-inverse navbar-fixed">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">Stock Report</a>
+                        </div>
+                        <div id="navbar" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="/admin/dash">HOME</a></li>
+                              
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </nav>
                 <h1>Stock Report</h1> 
                 <c:set var="evenCount" value="${0}" />
 

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,53 +36,45 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-   
+
     @Column(name = "id")
     private long id;
-   
-    
+
     @Size(min = 1, max = 20)
     @Column(name = "user_name")
     private String userName;
-   
-    
+
     @Size(min = 1, max = 20)
     @Column(name = "full_name")
     private String fullName;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-   
-    
-    @Size(min = 1, max = 100)
+
     @Column(name = "email")
     private String email;
-   
-    
-    @Size(min = 1, max = 200)
+
     @Column(name = "password")
     private String password;
-   
-    
-    @Size(min = 1, max = 20)
+
     @Column(name = "mobile_no")
     private String mobileNo;
-    @Size(max = 20)
+
+    @Column(name = "fav_game")
+    private String favGame;
     @Column(name = "day")
     private String day;
-    @Size(max = 20)
+
     @Column(name = "month")
     private String month;
-    @Size(max = 20)
     @Column(name = "male")
     private String male;
     @Size(max = 20)
     @Column(name = "female")
     private String female;
-   
-    
-    @Column(name = "created_date",insertable = false)
+
+    @Column(name = "created_date", insertable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Column(name = "modified_date",nullable = true)
+    @Column(name = "modified_date", nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
     @Column(name = "status")
@@ -104,6 +97,24 @@ public class User implements Serializable {
         this.password = password;
         this.mobileNo = mobileNo;
         this.createdDate = createdDate;
+    }
+
+    public User(long id, String userName, String fullName, String email, String password, String mobileNo, String favGame, String day, String month, String male, String female, Date createdDate, Date modifiedDate, Boolean status, List<UserRole> userRoleList) {
+        this.id = id;
+        this.userName = userName;
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+        this.mobileNo = mobileNo;
+        this.favGame = favGame;
+        this.day = day;
+        this.month = month;
+        this.male = male;
+        this.female = female;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
+        this.status = status;
+        this.userRoleList = userRoleList;
     }
 
     public User(long id, String rajeshgmailcom, String admin, boolean b) {
@@ -222,9 +233,18 @@ public class User implements Serializable {
     }
 
     public void setRoles(HashSet<Role> roles) {
+    }
+
+    public void setRoles(Set<Role> roles) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-  
-    
+    public String getFavGame() {
+        return favGame;
+    }
+
+    public void setFavGame(String favGame) {
+        this.favGame = favGame;
+    }
+
 }

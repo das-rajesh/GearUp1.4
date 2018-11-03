@@ -37,21 +37,22 @@ public class Login implements Serializable {
    
     @Column(name = "id")
     private long id;
-    @Size(max = 100)
     @Column(name = "user_name")
     private String userName;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 100)
+    
     @Column(name = "email")
     private String email;
     @Size(max = 200)
     @Column(name = "password")
     private String password;
    
+    @Column(name = "role")
+    private String role;
     
     @Column(name = "login_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date loginTime;
+    
     @Column(name = "logout_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date logoutTime;
@@ -65,9 +66,25 @@ public class Login implements Serializable {
         this.id = id;
     }
 
-    public Login(long id, Date loginTime) {
-        this.id = id;
+    public Login(String userName, String email, String password, String role, Date loginTime,
+            Boolean status) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
         this.loginTime = loginTime;
+        this.status = status;
+    }
+
+    public Login(long id, String userName, String email, String password, String role, Date loginTime, Date logoutTime, Boolean status) {
+        this.id = id;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.loginTime = loginTime;
+        this.logoutTime = logoutTime;
+        this.status = status;
     }
 
     public long getId() {
@@ -102,6 +119,14 @@ public class Login implements Serializable {
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public Date getLoginTime() {
         return loginTime;
     }
@@ -126,5 +151,6 @@ public class Login implements Serializable {
         this.status = status;
     }
 
+    
   
 }

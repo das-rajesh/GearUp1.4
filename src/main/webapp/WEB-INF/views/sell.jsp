@@ -17,6 +17,30 @@
         <link rel="stylesheet" type="text/css" href="css/catrep.css">
         <div class="container">
             <div class="row">
+                <nav class="navbar navbar-inverse navbar-fixed">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">Sale Report</a>
+                        </div>
+                        <div id="navbar" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="/admin/dash">HOME</a></li>
+<!--                                <li>
+                                    <form method="post" action="/admin/sale/">
+                                      <button type="submit" >DownloadReoprt</button>
+                            </form></li>-->
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </nav>
                 <h1>Sale  Report</h1> 
                 <c:set var="evenCount" value="${0}" />
 

@@ -1,0 +1,21 @@
+body{
+    background: url('../img/cover.jpeg');
+}
+.wrapper{
+    width: 90%;
+    margin: auto;
+}
+.list{
+    height: 450px;
+    overflow-y: scroll;
+}
+.products{
+    height: 646px;
+    overflow-y: scroll;
+}
+#landing .row .card{
+    background:rgba(255, 255, 255, 0.7);
+}
+#landing .row .col-md-8{
+    max-width: 63.666667%;
+}

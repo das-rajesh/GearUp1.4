@@ -5,11 +5,13 @@
  */
 package com.gearupnepal.web.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,6 +29,16 @@ import javax.validation.constraints.Size;
 @Table(name = "vendors")
 public class Vendor implements Serializable {
 
+    @Size(max = 100)
+    @Column(name = "website")
+    private String website;
+    @Size(max = 100)
+    @Column(name = "created_by")
+    private String createdBy;
+
+    @Column(name = "sub_category_model_name_id")
+    private Integer subCategoryModelNameId;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,21 +53,13 @@ public class Vendor implements Serializable {
 
     @Column(name = "contact_no")
     private String contactNo;
-    @Size(max = 100)
-    @Column(name = "website")
-    private String website;
 
     @Column(name = "type")
     private String type;
 
     @Column(name = "country")
     private String country;
-    @Column(name = "sub_category_model_name_id")
-    private Long subCategoryModelNameId;
 
-    @Size(min = 1, max = 20)
-    @Column(name = "created_by")
-    private String createdBy;
 
     @Column(name = "created_date", insertable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -65,38 +69,50 @@ public class Vendor implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
 
-    @OneToMany(mappedBy = "vendorId")
+    @OneToMany(mappedBy = "vendorId",fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("vendorId")
     private List<ChildSubcategory> childCategoryModelNameList;
 
     public Vendor() {
     }
 
-    public Vendor(long id, String name, String email, String contactNo, String website, String type, String country, Long subCategoryModelNameId, String createdBy, Date createdDate, Date modifiedDate, List<ChildSubcategory> childCategoryModelNameList) {
+    public Vendor(String website, String createdBy, Integer subCategoryModelNameId, long id, String name, String email, String contactNo, String type, String country, Date createdDate, Date modifiedDate, List<ChildSubcategory> childCategoryModelNameList) {
+        this.website = website;
+        this.createdBy = createdBy;
+        this.subCategoryModelNameId = subCategoryModelNameId;
         this.id = id;
         this.name = name;
         this.email = email;
         this.contactNo = contactNo;
-        this.website = website;
         this.type = type;
         this.country = country;
-        this.subCategoryModelNameId = subCategoryModelNameId;
-        this.createdBy = createdBy;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
         this.childCategoryModelNameList = childCategoryModelNameList;
     }
- public Vendor(String name, String email, String contactNo, String website, String type, String country, Long subCategoryModelNameId, String createdBy, Date createdDate, Date modifiedDate, List<ChildSubcategory> childCategoryModelNameList) {
-        this.name = name;
-        this.email = email;
-        this.contactNo = contactNo;
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
         this.website = website;
-        this.type = type;
-        this.country = country;
-        this.subCategoryModelNameId = subCategoryModelNameId;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
-        this.childCategoryModelNameList = childCategoryModelNameList;
+    }
+
+    public Integer getSubCategoryModelNameId() {
+        return subCategoryModelNameId;
+    }
+
+    public void setSubCategoryModelNameId(Integer subCategoryModelNameId) {
+        this.subCategoryModelNameId = subCategoryModelNameId;
     }
 
     public long getId() {
@@ -131,14 +147,6 @@ public class Vendor implements Serializable {
         this.contactNo = contactNo;
     }
 
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
     public String getType() {
         return type;
     }
@@ -153,22 +161,6 @@ public class Vendor implements Serializable {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public Long getSubCategoryModelNameId() {
-        return subCategoryModelNameId;
-    }
-
-    public void setSubCategoryModelNameId(Long subCategoryModelNameId) {
-        this.subCategoryModelNameId = subCategoryModelNameId;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
     }
 
     public Date getCreatedDate() {
@@ -195,4 +187,7 @@ public class Vendor implements Serializable {
         this.childCategoryModelNameList = childCategoryModelNameList;
     }
 
+  
+    
+    
 }

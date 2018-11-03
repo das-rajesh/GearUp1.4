@@ -1,3 +1,6 @@
+<%@page import="com.gearupnepal.web.entity.Login"%>
+<%@page import="org.springframework.beans.factory.annotation.Autowired"%>
+<%@page import="com.gearupnepal.web.entity.repository.LoginRepository"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -58,8 +61,9 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/POS">Point of Sale</a></li>
-                        <li><a href="#">Sign in as admin</a></li>
+                        <li><a href="/admin/signup">SIGNUP</a></li>
+                        <li><a href="/admin/pointofsale">POS</a></li>
+                        <li><a href="#">Sign in as ADMIN</a></li>
                         <li><a href="/logout" class="glyphicon glyphicon-off"></a></li>
 
                     </ul>
@@ -73,15 +77,18 @@
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
-                        <li class="active"><a href="/updateinventory">Update Inventory <span class="sr-only">(current)</span></a></li>
-                        <li><a href="/viewreport">View Report</a></li>
-                        <li><a href="/category">Category</a></li>
-                        <li><a href="/subcategory">Sub-Category</a></li>
-                        <li><a href="/childsubcategory">Child Sub-Category</a></li>
-                        <li><a href="/vendor">Vendor</a></li>
-                        <li><a href="/location">Location</a></li>
-                        <li><a href="/return">Return</a></li>
-                        <li><a href="/warranty">Warranty/Garranty</a></li>
+                        <li class="active"><a href="/admin/updateinventory">Update Inventory <span class="sr-only">(current)</span></a></li>
+                        <li><a href="/admin/viewreport">View Report</a></li>
+                        <li><a href="/admin/category">Category</a></li>
+                        <li><a href="/admin/subcategory">Sub-Category</a></li>
+                        <li><a href="/admin/childsubcategory">Child Sub-Category</a></li>
+                        <li><a href="/admin/vendor">Vendor</a></li>
+                        <li><a href="/admin/location">Location</a></li>
+<!--                        <li><a href="/admin/color">Color</a></li>-->
+                        <li><a href="/admin/size">Size</a></li>
+
+                        <li><a href="/admin/return">Return</a></li>
+                        <li><a href="/admin/warranty">Warranty/Garranty</a></li>
 
                     </ul>
                 </div>

@@ -5,12 +5,14 @@
  */
 package com.gearupnepal.web.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,6 +34,13 @@ import javax.validation.constraints.Size;
 @Table(name = "categories")
 public class Category implements Serializable {
 
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
+    @Size(max = 20)
+    @Column(name = "created_by")
+    private String createdBy;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,9 +49,6 @@ public class Category implements Serializable {
     
      @Column(name = "name")
     private String name;
-    @Lob
-    @Column(name = "photo")
-    private byte[] photo;
     
     @Column(name = "base64image")
     private String base64image;
@@ -50,9 +56,6 @@ public class Category implements Serializable {
     private Integer quantity;
   
     
-    @Size(min = 1, max = 20)
-    @Column(name = "created_by")
-    private String createdBy;
   
     
     @Column(name = "created_date",insertable = false)
@@ -64,7 +67,8 @@ public class Category implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
     
-    @OneToMany(mappedBy = "categoriesId")
+    @OneToMany(mappedBy = "categoriesId",fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("categoriesId")
     private List<SubCategory> subCategoryList;
 
     public Category() {
@@ -74,12 +78,25 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public Category(long id, String name, String createdBy, Date createdDate, Date modifiedDate) {
+    public Category(byte[] photo, String createdBy, long id, String name, String base64image, Integer quantity, Date createdDate, Date modifiedDate, List<SubCategory> subCategoryList) {
+        this.photo = photo;
+        this.createdBy = createdBy;
         this.id = id;
         this.name = name;
-        this.createdBy = createdBy;
+        this.base64image = base64image;
+        this.quantity = quantity;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
+        this.subCategoryList = subCategoryList;
+    }
+
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 
     public long getId() {
@@ -98,14 +115,6 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
     public String getBase64image() {
         return base64image;
     }
@@ -120,14 +129,6 @@ public class Category implements Serializable {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
     }
 
     public Date getCreatedDate() {
@@ -153,6 +154,16 @@ public class Category implements Serializable {
     public void setSubCategoryList(List<SubCategory> subCategoryList) {
         this.subCategoryList = subCategoryList;
     }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+  
 
   
 

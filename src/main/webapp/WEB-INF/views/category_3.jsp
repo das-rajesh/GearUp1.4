@@ -16,6 +16,8 @@
     </div>   
     <div class="col-md-8">
     </div>
+    <c:set var="evenCount" value="${0}" />
+
     <table class="table">
         <tr>
             <th>Id</th>
@@ -26,8 +28,8 @@
         </tr>
 
         <c:forEach var="category" items="${categories}">
-            <tr>
-                <td>${category.id}</td>
+            <c:set var="evenCount" value="${evenCount+1}" />            <tr>
+                <td>${evenCount}</td>
                 <td>${category.name}</td>
                 <td>${category.quantity}</td>
                 <td>

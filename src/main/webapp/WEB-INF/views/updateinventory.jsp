@@ -54,7 +54,7 @@
                 <label for="exampleInputEmail1">Price</label>
                 <input type="text" class="form-control" name="price"  placeholder="Enter price">
             </div>
-            <div class="form-group">
+<!--            <div class="form-group">
                 <label for="exampleFormControlSelect1">Size</label>
                 <select class="form-control" name="size" id="exampleFormControlSelect1">
                     <option>S</option>
@@ -80,7 +80,7 @@
                     <option>Grey</option>
                     <option>Orange</option>
                 </select>
-            </div>
+            </div>-->
             <div class="form-group">
                 <label for="exampleFormControlFile1">Image</label>
                 <input type="file" class="form-control-file" name="photo" id="exampleFormControlFile1">
@@ -118,18 +118,18 @@
     {
         // alert('s');
         link1 = elm.value;
-        window.location = "/updateinventory/subcategoryofcategory/" + elm.value;
+        window.location = "/admin/updateinventory/subcategoryofcategory/" + elm.value;
     }</script>
 <script>
     function handleSubCategory(elm)
     {
-        window.location = "/updateinventory/ch/" + elm.value + "/" + ${categoryId};
+        window.location = "/admin/updateinventory/ch/" + elm.value + "/" + ${categoryId};
     }
 </script>
 <script>
     function handleChildSubCategory(elm)
     {
-        window.location = "/updateinventory/csc/" + ${subcategoryId} + "/" + elm.value;
+        window.location = "/admin/updateinventory/csc/" + ${subcategoryId} + "/" + elm.value;
     }
 </script>  
 <script>

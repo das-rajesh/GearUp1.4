@@ -59,9 +59,9 @@
                 <td>${childsubcategory.name}</td>
                 <td>${childsubcategory.quantity}</td>
                 <td>
-                    <a href="/edit/${childsubcategory.id}">Edit
+                    <a href="/childsubcategory/edit/${childsubcategory.id}">Edit
                     </a>
-                    <a href="/delete/${childsubcategory.id}">Delete
+                    <a href="/childsubcategory/delete/${childsubcategory.id}">Delete
                     </a>
                 </td>
             </tr>
@@ -74,12 +74,12 @@
     {
         // alert('s');
         link1 = elm.value;
-        window.location = "/childsubcategory/subcategoryofcategory/" + elm.value;
+        window.location = "/admin/childsubcategory/subcategoryofcategory/" + elm.value;
     }</script>
 <script>
     function handleSelectchildsubd(elm)
     {
-        window.location = "/childsubcategory/ch/" + elm.value + "/" + ${categoryId};
+        window.location = "/admin/childsubcategory/ch/" + elm.value + "/" + ${categoryId};
     }
 </script>  
 <script>
